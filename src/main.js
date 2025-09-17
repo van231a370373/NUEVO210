@@ -276,3 +276,58 @@ window.waitForLibraries = function (libraries, callback, timeout = 5000) {
 
   check();
 };
+
+// Frontend i18n: language selector in header and DOM translations
+import { t } from './utils/i18n/index.js';
+import { renderLanguageSelector } from './utils/i18n/selector.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const stored = localStorage.getItem('pwh_lang');
+  let lang = stored || (navigator.language || navigator.userLanguage || 'pl').substring(0,2) || 'pl';
+  if (!['pl','es','en'].includes(lang)) lang = 'pl';
+
+  function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const text = t(key, lang);
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = text;
+      } else {
+        el.textContent = text;
+      }
+    });
+  }
+
+  const selector = renderLanguageSelector(lang, newLang => {
+    lang = newLang;
+    localStorage.setItem('pwh_lang', lang);
+    applyTranslations();
+  });
+
+  // Try to insert selector into common header containers (nav_menu, nav_title, profile_info)
+  const targets = ['.nav_menu', '.nav_title', '.profile_info', '.top_nav', 'header', 'body'];
+  let placed = false;
+  for (const sel of targets) {
+    const node = document.querySelector(sel);
+    if (node) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'language-selector d-flex align-items-center';
+      wrapper.style.padding = '6px 8px';
+      wrapper.appendChild(selector);
+      node.appendChild(wrapper);
+      placed = true;
+      break;
+    }
+  }
+  if (!placed) {
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'fixed';
+    wrapper.style.top = '8px';
+    wrapper.style.right = '8px';
+    wrapper.style.zIndex = '2000';
+    wrapper.appendChild(selector);
+    document.body.appendChild(wrapper);
+  }
+
+  applyTranslations();
+});

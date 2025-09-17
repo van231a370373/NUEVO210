@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: PodatkiwHiszpanii IRNR API
+  version: 1.0.0
+paths:
+  /usuarios:
+    post:
+      summary: Crear usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '201':
+          description: Usuario creado
+  /inmuebles:
+    get:
+      summary: Listar inmuebles
+      responses:
+        '200':
+          description: Lista de inmuebles
+    post:
+      summary: Crear inmueble
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inmueble'
+      responses:
+        '201':
+          description: Inmueble creado
+  /declaraciones210:
+    post:
+      summary: Crear declaración 210
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Declaracion210'
+      responses:
+        '201':
+          description: Declaración creada
+    get:
+      summary: Listar declaraciones
+      responses:
+        '200':
+          description: Lista de declaraciones
+  /calcular-irnr:
+    post:
+      summary: Calcular IRNR
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculoIRNR'
+      responses:
+        '200':
+          description: Resultado cálculo
+  /generar-210:
+    post:
+      summary: Generar PDF Modelo 210
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Declaracion210'
+      responses:
+        '200':
+          description: PDF generado
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        email: { type: string }
+        password: { type: string }
+        nombre: { type: string }
+        idioma: { type: string }
+    Inmueble:
+      type: object
+      properties:
+        direccion: { type: string }
+        valor_catastral: { type: number }
+        uso: { type: string }
+    Declaracion210:
+      type: object
+      properties:
+        titular_id: { type: integer }
+        inmueble_id: { type: integer }
+        tipo_renta: { type: integer }
+        base_imponible: { type: number }
+        cuota: { type: number }
+        estado: { type: string }
+    CalculoIRNR:
+      type: object
+      properties:
+        tipo_renta: { type: integer }
+        base: { type: number }
+        residenciaUE: { type: boolean }

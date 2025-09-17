@@ -136,8 +136,8 @@ export default defineConfig({
   },
   server: {
     open: '/index.html',
-    port: 3000,
-    host: true,
+    port: 8080,
+    host: '0.0.0.0',
     watch: {
       usePolling: false,
       interval: 100,
