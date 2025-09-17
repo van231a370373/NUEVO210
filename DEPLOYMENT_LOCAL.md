@@ -85,6 +85,22 @@ GRANT ALL PRIVILEGES ON DATABASE nuevo210 TO Admin;
 \q
 ```
 
+**Nota:** Estas son las credenciales para conectarte a PostgreSQL desde la aplicación. El usuario `Admin` con contraseña `Kocham647` es el usuario de base de datos, no el usuario de la aplicación web.
+
+### 2.3 Credenciales de Acceso
+
+**Credenciales de PostgreSQL (base de datos):**
+- Usuario: `Admin`
+- Contraseña: `Kocham647`
+- Base de datos: `nuevo210`
+
+**Credenciales de la aplicación web (usuario de prueba):**
+- Email: `test@example.com`
+- Contraseña: `password`
+- Nombre: `Admin`
+
+Estas últimas se crean automáticamente al ejecutar `npm run seed`.
+
 ### 2.3 Verificar Conexión
 ```bash
 # Probar conexión
