@@ -3,7 +3,7 @@
 
 -- Insertar usuario de prueba
 INSERT INTO usuarios (email, password_hash, nombre, idioma, moneda, rol_id) VALUES
-('test@example.com', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Admin', 'ES', 'EUR', 1)
+('test@example.com', '$2b$10$LxQrT84I3B5Db3MDkR8xFOHPtMMa28e5VuvIbadLQBa6yitZl1L', 'Admin', 'ES', 'EUR', 1)
 ON CONFLICT (email) DO NOTHING;
 
 -- Insertar titular de ejemplo

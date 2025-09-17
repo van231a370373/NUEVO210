@@ -157,7 +157,7 @@ npm run seed
 ```
 
 Esto crea:
-- Un usuario de prueba: `test@example.com` / `password` (nombre: Admin)
+- Un usuario de prueba: `test@example.com` / `Kocham647` (nombre: Admin)
 - Un titular de ejemplo
 - Un inmueble y declaración de muestra
 
